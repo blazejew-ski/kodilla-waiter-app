@@ -1,0 +1,35 @@
+@import '../../../styles/settings.scss';
+
+
+.table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid $color-dark;
+  .tableLeft {
+    line-height: ($base-size * 4);
+    color: $color-dark;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+      padding: 0 20px 0 0;
+    }
+  }
+  .tableTitle {
+    font-size: ($base-size * 3);
+    width: 190px;
+  }
+  .tablestatus {
+    font-weight: bold;
+    span {font-weight: normal;}
+  }
+}
+
+.tableLink{
+  color: $color-light;
+  text-decoration: none;
+}

@@ -1,0 +1,14 @@
+@import '../../../styles/settings.scss';
+
+
+.table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tableLink{
+  color: $color-light;
+  text-decoration: none;
+}

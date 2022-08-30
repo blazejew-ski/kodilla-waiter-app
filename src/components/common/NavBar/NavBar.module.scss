@@ -1,0 +1,61 @@
+@import '../../../styles/settings.scss';
+
+
+.navBar {
+  background-color: $color-blue;
+  width: 100%;
+  * {
+    font-size: 18px;
+  }
+
+  >div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .homeIconWrapper {
+    height: 60px;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+    span {
+      padding-right: $base-size;
+      color: $color-warning;
+      font-size: ($base-size * 2);
+      vertical-align: middle;
+      position: relative;
+      font-size: 24px;
+      color: $color-light;
+      text-decoration: none;
+    }
+  }
+  .linksListWrapper {
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+    line-height: 100%;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      .linkActive {
+        color: $color-light;
+      }
+      a {
+        color: $color-light;
+        text-decoration: none;
+        &:hover {
+          color: $color-warning;
+        }
+      }
+    }
+  }
+}
