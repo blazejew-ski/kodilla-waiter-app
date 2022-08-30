@@ -1,20 +1,37 @@
 import styles from './Home.module.scss';
 import { Link } from 'react-router-dom';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Spinner } from 'react-bootstrap';
 import { getAllTables } from '../../../redux/tablesRedux';
 import { useSelector } from 'react-redux';
+import { useEffect, useReducer } from 'react';
 
 const Home = () => {
+  const tablesData = useSelector(getAllTables);
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  function handleClick() {
+    forceUpdate();
+    console.log('forceUpdate');
+  }
+  if (tablesData.length === 0) {
+    setTimeout(() => {
+      handleClick()
+    }, 1500);
 
+// Without the forceupdate, the getAllTables was always returning empty, i had to improvise.
 
-  const tables = useSelector(getAllTables);
+    return (
+      <div className={styles.spinner}>
+        <Spinner animation="border" variant="primary"/>
+      </div>
+    );
+  }
 
+  console.log('tablesData :', tablesData);
   return (
     <section className={styles.home}>
       <Container>
-        <h2 className={styles.heading}>Browse tables</h2>
         <ul>
-          {tables.map(table => (
+          {tablesData.map(table => (
             <li key={table.id} className={styles.table}>
               <div className={styles.tableLeft}>
                 <span className={styles.tableTitle}>Table <span>{table.id}</span></span>

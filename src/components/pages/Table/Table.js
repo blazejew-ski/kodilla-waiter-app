@@ -13,11 +13,12 @@ const Table = props => {
   const {tableId} = useParams();
   const id = tableId;
   const table = useSelector(state => getTableById(state, tableId));
-  // if(!tableData) return <Navigate to="/404" />
+
   const [people, setPeople] = useState(table.people);
   const [maxPeople, setPeopleMax] = useState(table.maxPeople);
   const [bill, setBill] = useState(table.bill);
   const [status, setStatus] = useState(table.status);
+  if(!table) return <Navigate to="/404" />
 
   const setPeopleMaxInput = (value) => {
     console.log('on start: ' + value + ' / ' + maxPeople);
@@ -35,7 +36,7 @@ const Table = props => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(updateTable({id, status, people, maxPeople, bill}));
-    console.log('dispatch: ' + id + status + people + maxPeople + bill);
+    console.log('dispatch updateTable: ' + id + status + people + maxPeople + bill);
   };
 
   return (
