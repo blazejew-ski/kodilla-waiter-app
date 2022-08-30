@@ -41,12 +41,18 @@ const Table = props => {
   return (
     <Container>
       <section className={styles.tableWrapper}>
-        <form onSubmit={handleSubmit} key={table.id} className={styles.table}>
+        <form onSubmit={handleSubmit} key={id} className={styles.table}>
           <h3>
-            <span>Table:</span> {table.id}
+            <span>Table:</span> {id}
           </h3>
           <div className={styles.tableLine}>
-            <span>Status:</span> {table.status}
+            <span>Status:</span>
+            <Form.Select aria-label="Default select example" value={status} onChange={e => setStatus(e.target.value)}>
+              <option>Select table status</option>
+              <option value="Busy">Busy</option>
+              <option value="Free">Free</option>
+              <option value="Needs cleaning">Needs cleaning</option>
+            </Form.Select>
           </div>
           <div className={styles.tableLine}>
             <span>People:</span>
