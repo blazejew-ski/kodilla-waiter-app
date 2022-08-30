@@ -47,7 +47,7 @@ const Table = props => {
           </h3>
           <div className={styles.tableLine}>
             <span>Status:</span>
-            <Form.Select aria-label="Default select example" value={status} onChange={e => setStatus(e.target.value)}>
+            <Form.Select aria-label="Default select example" value={status} onChange={e => setStatus(e.target.value)}  className={styles.formSelect}>
               <option>Select table status</option>
               <option value="Busy">Busy</option>
               <option value="Free">Free</option>
