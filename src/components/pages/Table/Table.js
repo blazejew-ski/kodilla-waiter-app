@@ -1,14 +1,15 @@
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { getTableById, updateTable } from '../../../redux/tablesRedux';
+import { getTableById, updateTableApi } from '../../../redux/tablesRedux';
 import { useParams } from 'react-router';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate  } from 'react-router-dom';
 import styles from './Table.module.scss';
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 
 const Table = props => {
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const dispatch = useDispatch();
   const {tableId} = useParams();
   const id = tableId;
@@ -18,6 +19,7 @@ const Table = props => {
   const [maxPeople, setPeopleMax] = useState(table.maxPeople);
   const [bill, setBill] = useState(table.bill);
   const [status, setStatus] = useState(table.status);
+  const navigate = useNavigate();
   if(!table) return <Navigate to="/404" />
 
   const setPeopleMaxInput = (value) => {
@@ -33,10 +35,30 @@ const Table = props => {
     }
   }
 
+  function handleClick() {
+    forceUpdate();
+    console.log('forceUpdate');
+  }
+  if (table.length === 0) {
+    setTimeout(() => {
+      handleClick()
+    }, 1500);
+
+// Without the forceupdate, the getAllTables was always returning empty, i had to improvise.
+
+    return (
+      <div className={styles.spinner}>
+        <Spinner animation="border" variant="primary"/>
+      </div>
+    );
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateTable({id, status, people, maxPeople, bill}));
-    console.log('dispatch updateTable: ' + id + status + people + maxPeople + bill);
+    console.log('dispatch updateTableApi: ' + id + status + people + maxPeople + bill);
+    dispatch(updateTableApi({id, status, people, maxPeople, bill}));
+    console.log('dispatch-done updateTableApi: ' + id + status + people + maxPeople + bill);
+    navigate('/');
   };
 
   return (
