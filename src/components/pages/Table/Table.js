@@ -58,7 +58,7 @@ const Table = props => {
     console.log('dispatch updateTableApi: ' + id + status + people + maxPeople + bill);
     dispatch(updateTableApi({id, status, people, maxPeople, bill}));
     console.log('dispatch-done updateTableApi: ' + id + status + people + maxPeople + bill);
-    navigate('/');
+    // navigate('/');
   };
 
   return (

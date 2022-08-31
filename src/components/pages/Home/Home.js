@@ -8,23 +8,32 @@ import { useEffect, useReducer } from 'react';
 const Home = () => {
   const tablesData = useSelector(getAllTables);
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
   function handleClick() {
     forceUpdate();
     console.log('forceUpdate');
   }
-  if (tablesData.length === 0) {
-    setTimeout(() => {
-      handleClick()
-    }, 1500);
+//   if (tablesData.length === 0) {
+//     setTimeout(() => {
+//       handleClick()
+//     }, 1500);
 
-// Without the forceupdate, the getAllTables was always returning empty, i had to improvise.
+// // Without the forceupdate, the getAllTables was always returning empty, i had to improvise.
 
-    return (
-      <div className={styles.spinner}>
-        <Spinner animation="border" variant="primary"/>
-      </div>
-    );
-  }
+//     return (
+//       <div className={styles.spinner}>
+//         <Spinner animation="border" variant="primary"/>
+//       </div>
+//     );
+//   }
+
+  useEffect(() => {
+    if (tablesData.length === 0) {
+      setTimeout(() => {
+        handleClick()
+      }, 1500);
+    }
+  }, [tablesData.length === 0])
 
   console.log('tablesData :', tablesData);
   return (
